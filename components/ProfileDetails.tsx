@@ -124,7 +124,7 @@ export default function ProfileDetails() {
                 </motion.div>
 
                 {/* Skills & Achievements Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-8">
                     {/* Skills */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
@@ -135,7 +135,7 @@ export default function ProfileDetails() {
                         <h2 className="text-3xl font-bold tracking-normal text-green-500 ml-2">
                             SKILLS
                         </h2>
-                        <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md h-full hover:border-green-500/30 transition-colors">
+                        <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md md:h-full hover:border-green-500/30 transition-colors">
                             <div className="mb-6">
                                 <h3 className="font-bold text-green-400 mb-3 text-lg">Technical Skills</h3>
                                 <p className="text-gray-300 leading-relaxed text-sm">{technicalSkills}</p>
@@ -163,7 +163,7 @@ export default function ProfileDetails() {
                         <h2 className="text-3xl font-bold tracking-normal text-yellow-500 ml-2">
                             CERTIFICATIONS
                         </h2>
-                        <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md h-full hover:border-yellow-500/30 transition-colors">
+                        <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md md:h-full hover:border-yellow-500/30 transition-colors">
                             <ul className="space-y-3">
                                 {certifications.map((cert, index) => (
                                     <li key={index} className="flex items-start gap-3 text-sm text-gray-300 group">
