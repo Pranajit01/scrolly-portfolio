@@ -67,7 +67,7 @@ const references = [
 
 export default function ProfileDetails() {
     return (
-        <section className="relative w-full py-20 px-4 md:px-12 bg-[#121212] text-white">
+        <section className="relative w-full py-20 px-4 md:px-12 bg-[#121212] text-white z-10">
             <div className="max-w-6xl mx-auto space-y-16">
 
                 {/* Career Objective / About Me */}
@@ -77,7 +77,7 @@ export default function ProfileDetails() {
                     viewport={{ once: true }}
                     className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-colors"
                 >
-                    <h2 className="text-3xl font-bold tracking-tighter text-blue-500 mb-6">
+                    <h2 className="text-3xl font-bold tracking-normal text-blue-500 mb-6">
                         CAREER OBJECTIVE
                     </h2>
                     <div className="text-lg text-gray-300 leading-relaxed font-light">
@@ -103,7 +103,7 @@ export default function ProfileDetails() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-3xl font-bold tracking-tighter text-purple-500 mb-8 ml-2">
+                    <h2 className="text-3xl font-bold tracking-normal text-purple-500 mb-8 ml-2">
                         EDUCATION
                     </h2>
                     <div className="grid grid-cols-1 gap-6">
@@ -132,7 +132,7 @@ export default function ProfileDetails() {
                         viewport={{ once: true }}
                         className="space-y-6"
                     >
-                        <h2 className="text-3xl font-bold tracking-tighter text-green-500 ml-2">
+                        <h2 className="text-3xl font-bold tracking-normal text-green-500 ml-2">
                             SKILLS
                         </h2>
                         <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md h-full hover:border-green-500/30 transition-colors">
@@ -160,7 +160,7 @@ export default function ProfileDetails() {
                         viewport={{ once: true }}
                         className="space-y-6"
                     >
-                        <h2 className="text-3xl font-bold tracking-tighter text-yellow-500 ml-2">
+                        <h2 className="text-3xl font-bold tracking-normal text-yellow-500 ml-2">
                             CERTIFICATIONS
                         </h2>
                         <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md h-full hover:border-yellow-500/30 transition-colors">
@@ -189,7 +189,7 @@ export default function ProfileDetails() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-3xl font-bold tracking-tighter text-pink-500 mb-8 ml-2">
+                    <h2 className="text-3xl font-bold tracking-normal text-pink-500 mb-8 ml-2">
                         REFERENCES
                     </h2>
                     <div className="grid gap-6 md:grid-cols-2">

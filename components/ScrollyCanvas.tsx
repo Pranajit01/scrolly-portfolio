@@ -133,7 +133,7 @@ export default function ScrollyCanvas() {
                     </div>
                 )}
                 <canvas ref={canvasRef} className="block w-full h-full" />
-                <Overlay />
+                <Overlay scrollYProgress={scrollYProgress} />
             </div>
         </div>
     );
