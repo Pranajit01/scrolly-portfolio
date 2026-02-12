@@ -1,0 +1,8 @@
+{
+  "name": "scrolly-portfolio",
+  "version": 2,
+  "public": false,
+  "buildCommand": "npm run build",
+  "framework": "nextjs",
+  "nodejs": "18.x"
+}
