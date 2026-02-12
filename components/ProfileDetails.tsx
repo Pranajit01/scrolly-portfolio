@@ -67,7 +67,7 @@ const references = [
 
 export default function ProfileDetails() {
     return (
-        <section className="relative w-full py-20 px-4 md:px-12 bg-[#121212] text-white z-10">
+        <section className="relative w-full pt-32 pb-20 px-4 md:px-12 bg-[#121212] text-white z-20">
             <div className="max-w-6xl mx-auto space-y-16">
 
                 {/* Career Objective / About Me */}
