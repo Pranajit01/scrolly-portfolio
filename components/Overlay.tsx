@@ -24,7 +24,7 @@ export default function Overlay({ scrollYProgress }: { scrollYProgress: any }) {
     const targetScale = isMobile ? 0.8 : 0.6;
 
     // SECTION 1: 0% -> 30% of scroll
-    const top = useTransform(scrollYProgress, [0, 0.25], ["50%", targetTop]);
+    const top = useTransform(scrollYProgress, [0, 0.25], ["75%", targetTop]);
     const left = useTransform(scrollYProgress, [0, 0.25], ["50%", targetLeft]);
     const scale = useTransform(scrollYProgress, [0, 0.25], [1, targetScale]);
     const targetX = isMobile ? "-50%" : "0%";
