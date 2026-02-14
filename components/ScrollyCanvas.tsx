@@ -5,15 +5,15 @@ import { useScroll, useMotionValueEvent } from "framer-motion";
 import Overlay from "./Overlay";
 
 // FRAME_STEP: Load every Nth frame. 
-// User request: New 6-frame sequence.
+// User request: New sequence with 147 frames.
 // Solution:
-// 1. Range: 0 to 6.
-// 2. Step: 1 (Show every frame).
+// 1. Range: 0 to 146 (147 frames).
+// 2. Step: 6 (147 / 6 = ~24 frames). Keeps performance high.
 // 3. Height: 200vh.
 const START_FRAME = 0;
-const END_FRAME = 6;
+const END_FRAME = 146;
 const TOTAL_RANGE = END_FRAME - START_FRAME;
-const FRAME_STEP = 1;
+const FRAME_STEP = 6;
 const RENDER_FRAME_COUNT = Math.ceil(TOTAL_RANGE / FRAME_STEP);
 
 export default function ScrollyCanvas() {
