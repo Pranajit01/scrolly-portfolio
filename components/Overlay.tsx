@@ -64,30 +64,30 @@ export default function Overlay({ scrollYProgress }: { scrollYProgress: any }) {
             </motion.div>
 
             {/* Section 2 */}
-            <motion.div
-                style={{ opacity: opacity2, y: y2 }}
-                className="fixed top-1/2 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-20 -translate-y-1/2 w-[90%] md:max-w-lg text-center md:text-left"
-            >
-                <h2 className="text-2xl md:text-5xl font-bold text-white leading-tight tracking-wide">
-                    Turning knowledge into <span className="text-blue-500">real-world action</span>.
-                </h2>
-                <p className="text-sm md:text-lg text-gray-400 mt-6 leading-relaxed">
-                    &quot;AI isn&apos;t replacing skills—it&apos;s amplifying them for those who know how to use it right.&quot;
-                </p>
-            </motion.div>
+            {/* Section 2 */}
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-20 -translate-y-1/2 w-[90%] md:max-w-lg text-center md:text-left pointer-events-none">
+                <motion.div style={{ opacity: opacity2, y: y2 }}>
+                    <h2 className="text-2xl md:text-5xl font-bold text-white leading-tight tracking-wide">
+                        Turning knowledge into <span className="text-blue-500">real-world action</span>.
+                    </h2>
+                    <p className="text-sm md:text-lg text-gray-400 mt-6 leading-relaxed">
+                        &quot;AI isn&apos;t replacing skills—it&apos;s amplifying them for those who know how to use it right.&quot;
+                    </p>
+                </motion.div>
+            </div>
 
             {/* Section 3 */}
-            <motion.div
-                style={{ opacity: opacity3, y: y3 }}
-                className="fixed top-1/2 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:right-20 -translate-y-1/2 w-[90%] md:max-w-lg text-center md:text-right"
-            >
-                <h2 className="text-2xl md:text-5xl font-bold text-white leading-tight tracking-wide">
-                    Building intelligent <span className="text-purple-500">systems</span>.
-                </h2>
-                <p className="text-sm md:text-lg text-gray-400 mt-6 leading-relaxed">
-                    Aspiring to create solutions in business, education, and society.
-                </p>
-            </motion.div>
+            {/* Section 3 */}
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:right-20 -translate-y-1/2 w-[90%] md:max-w-lg text-center md:text-right pointer-events-none">
+                <motion.div style={{ opacity: opacity3, y: y3 }}>
+                    <h2 className="text-2xl md:text-5xl font-bold text-white leading-tight tracking-wide">
+                        Building intelligent <span className="text-purple-500">systems</span>.
+                    </h2>
+                    <p className="text-sm md:text-lg text-gray-400 mt-6 leading-relaxed">
+                        Aspiring to create solutions in business, education, and society.
+                    </p>
+                </motion.div>
+            </div>
         </div>
     );
 }
