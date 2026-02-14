@@ -56,14 +56,7 @@ const certifications = [
 
 const careerObjective = "I'm looking to build a career in Generative AI and Data Analytics. I want to put my technical skills and problem-solving abilities to good use, keep learning on the job, and get hands-on experience through internships and projects. My goal is to actually make a difference wherever I work.";
 
-const references = [
-    {
-        name: "Dr Nisarga Bhattacharjee",
-        role: "Assistant Professor, TECHNO INDIA UNIVERSITY",
-        email: "XXXXX1234@xxxxx.com",
-        phone: "XXXXXXXXXX",
-    }
-];
+
 
 export default function ProfileDetails() {
     return (
@@ -192,17 +185,10 @@ export default function ProfileDetails() {
                     <h2 className="text-3xl font-bold tracking-normal text-pink-500 mb-8 ml-2">
                         REFERENCES
                     </h2>
-                    <div className="grid gap-6 md:grid-cols-2">
-                        {references.map((ref, index) => (
-                            <div key={index} className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-pink-500/5 transition-all group">
-                                <h3 className="font-bold text-white text-lg group-hover:text-pink-400 transition-colors">{ref.name}</h3>
-                                <p className="text-sm text-gray-400 mb-4">{ref.role}</p>
-                                <div className="space-y-1 text-sm text-gray-500 font-mono">
-                                    <p>Email: {ref.email}</p>
-                                    <p>Phone: {ref.phone}</p>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                        <p className="text-gray-400 italic">
+                            References will be added later.
+                        </p>
                     </div>
                 </motion.div>
 
