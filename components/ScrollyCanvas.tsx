@@ -4,12 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 import Overlay from "./Overlay";
 
-// FRAME_STEP: Load every Nth frame.
-// User request: "stop the frame animation in three scrolls", "website still feels laggy".
-// Solution: Aggressive frame skipping. 120 / 6 = 20 frames. This is very lightweight.
-const TOTAL_FRAMES = 120;
-const FRAME_STEP = 6;
-const RENDER_FRAME_COUNT = Math.ceil(TOTAL_FRAMES / FRAME_STEP);
+// FRAME_STEP: Load every Nth frame. 
+// User request: "decrease the scroll", "cut down the last few frames", "make website minimal".
+// Solution:
+// 1. Trim range: Start at frame 20 (skip intro), End at frame 100 (cut outro). Total 80 frames range.
+// 2. Step: 4. (80 / 4 = 20 frames). Keeps it lightweight.
+// 3. Height: 200vh. This means the user only has to scroll "one full screen" to see everything. Very minimal.
+const START_FRAME = 20;
+const END_FRAME = 100;
+const TOTAL_RANGE = END_FRAME - START_FRAME;
+const FRAME_STEP = 4;
+const RENDER_FRAME_COUNT = Math.ceil(TOTAL_RANGE / FRAME_STEP);
 
 export default function ScrollyCanvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -34,8 +39,8 @@ export default function ScrollyCanvas() {
                 const promise = new Promise<void>((resolve, reject) => {
                     const img = new Image();
 
-                    // Calculate actual file index: 0, 3, 6, 9...
-                    const realIndex = i * FRAME_STEP;
+                    // Calculate actual file index with offset
+                    const realIndex = START_FRAME + (i * FRAME_STEP);
 
                     // Pad number with leading zeros (000, 001, ... 119)
                     const frameIndex = realIndex.toString().padStart(3, "0");
@@ -121,7 +126,7 @@ export default function ScrollyCanvas() {
     }, [currentFrame, images]);
 
     return (
-        <div ref={containerRef} className="relative h-[300vh] bg-transparent">
+        <div ref={containerRef} className="relative h-[200vh] bg-transparent">
             {/* Sticky Container */}
             <div className="sticky top-0 h-screen w-full overflow-hidden">
                 {loading && (
