@@ -82,6 +82,25 @@ const Contact = () => {
 
                 </form>
 
+                <div className="mt-8 flex gap-6 justify-center">
+                    <a
+                        href="https://linkedin.com/in/pranajitdas"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-white transition-colors text-sm font-semibold tracking-wide uppercase"
+                    >
+                        LinkedIn
+                    </a>
+                    <a
+                        href="https://github.com/Pranajit01"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-white transition-colors text-sm font-semibold tracking-wide uppercase"
+                    >
+                        GitHub
+                    </a>
+                </div>
+
                 <div className="mt-12 text-sm text-gray-500">
                     <p>© {new Date().getFullYear()} Pranajit Das. Built with Next.js & Framer Motion.</p>
                 </div>
