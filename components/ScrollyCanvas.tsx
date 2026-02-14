@@ -5,15 +5,15 @@ import { useScroll, useMotionValueEvent } from "framer-motion";
 import Overlay from "./Overlay";
 
 // FRAME_STEP: Load every Nth frame. 
-// User request: "decrease the scroll", "cut down the last few frames", "make website minimal".
+// User request: New sequence with 147 frames.
 // Solution:
-// 1. Trim range: Start at frame 20 (skip intro), End at frame 100 (cut outro). Total 80 frames range.
-// 2. Step: 4. (80 / 4 = 20 frames). Keeps it lightweight.
-// 3. Height: 200vh. This means the user only has to scroll "one full screen" to see everything. Very minimal.
-const START_FRAME = 20;
-const END_FRAME = 100;
+// 1. Range: 0 to 146 (147 frames).
+// 2. Step: 6 (147 / 6 = ~24 frames). Keeps performance high.
+// 3. Height: 200vh.
+const START_FRAME = 0;
+const END_FRAME = 146;
 const TOTAL_RANGE = END_FRAME - START_FRAME;
-const FRAME_STEP = 4;
+const FRAME_STEP = 6;
 const RENDER_FRAME_COUNT = Math.ceil(TOTAL_RANGE / FRAME_STEP);
 
 export default function ScrollyCanvas() {
