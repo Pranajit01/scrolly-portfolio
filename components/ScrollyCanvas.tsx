@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 import Overlay from "./Overlay";
 
-// FRAME_STEP: Load every Nth frame to reduce memory usage and "cut" frames as requested.
+// FRAME_STEP: Load every Nth frame.
+// User request: "stop the frame animation in three scrolls", "website still feels laggy".
+// Solution: Aggressive frame skipping. 120 / 6 = 20 frames. This is very lightweight.
 const TOTAL_FRAMES = 120;
-const FRAME_STEP = 3;
+const FRAME_STEP = 6;
 const RENDER_FRAME_COUNT = Math.ceil(TOTAL_FRAMES / FRAME_STEP);
 
 export default function ScrollyCanvas() {
@@ -15,15 +17,14 @@ export default function ScrollyCanvas() {
     const [loading, setLoading] = useState(true);
     const [currentFrame, setCurrentFrame] = useState(0);
 
-    // We need a tall container to scroll through
-    // Increased height to 250vh to make text readable (slower scroll relative to content)
+    // "Three scrolls" = 300vh (approximating 1 scroll = 100vh)
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"],
     });
 
-    // Preload images (Skip frames logic)
+    // Preload images
     useEffect(() => {
         const loadImages = async () => {
             const loadedImages: HTMLImageElement[] = [];
@@ -120,17 +121,16 @@ export default function ScrollyCanvas() {
     }, [currentFrame, images]);
 
     return (
-        <div ref={containerRef} className="relative h-[250vh] bg-transparent">
+        <div ref={containerRef} className="relative h-[300vh] bg-transparent">
             {/* Sticky Container */}
             <div className="sticky top-0 h-screen w-full overflow-hidden">
                 {loading && (
                     <div className="absolute inset-0 flex items-center justify-center text-white z-50">
-                        Loading Sequence...
-                        <br />
-                        <span className="text-xs text-gray-500 mt-2">Optimizing frames...</span>
+                        Loading...
                     </div>
                 )}
-                <canvas ref={canvasRef} className="block w-full h-full" />
+                {/* will-change: contents helps browser optimize rendering */}
+                <canvas ref={canvasRef} className="block w-full h-full will-change-contents" />
                 <Overlay scrollYProgress={scrollYProgress} />
             </div>
         </div>

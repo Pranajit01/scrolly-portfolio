@@ -13,7 +13,6 @@ export default function Cursor() {
                 y: e.clientY
             });
 
-            // Check if hovering over clickable elements
             const target = e.target as HTMLElement;
             setIsHovered(
                 target.tagName === 'A' ||
@@ -31,23 +30,23 @@ export default function Cursor() {
 
     return (
         <>
-            {/* Main Dot */}
+            {/* Apple/iPad Style Cursor: Translucent Gray Circle */}
             <motion.div
-                className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference hidden md:block"
-                animate={{ x: mousePosition.x - 4, y: mousePosition.y - 4 }}
-                transition={{ type: "tween", ease: "backOut", duration: 0.1 }}
-            />
-            {/* Trailing Ring */}
-            <motion.div
-                className="fixed top-0 left-0 border border-white rounded-full pointer-events-none z-[9998] mix-blend-difference hidden md:block"
-                animate={{
-                    x: mousePosition.x - (isHovered ? 24 : 16),
-                    y: mousePosition.y - (isHovered ? 24 : 16),
-                    width: isHovered ? 48 : 32,
-                    height: isHovered ? 48 : 32,
-                    opacity: 1
+                className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden md:block backdrop-none"
+                style={{
+                    background: "rgba(200, 200, 200, 0.4)", // Translucent gray
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    boxShadow: "0 0 10px rgba(0,0,0,0.1)"
                 }}
-                transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.8 }}
+                animate={{
+                    x: mousePosition.x - (isHovered ? 30 : 10),
+                    y: mousePosition.y - (isHovered ? 30 : 10),
+                    width: isHovered ? 60 : 20,
+                    height: isHovered ? 60 : 20,
+                    borderRadius: "50%"
+                }}
+                // Fast, snappy spring transition like iPadOS
+                transition={{ type: "spring", stiffness: 500, damping: 28, mass: 0.5 }}
             />
         </>
     );
