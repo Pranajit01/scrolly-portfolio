@@ -84,7 +84,7 @@ export default function ProfileDetails() {
                         </div>
                         <div className="md:text-right">
                             <p><span className="text-white font-semibold">Email:</span> daspranajit973@gmail.com</p>
-                            <p><span className="text-white font-semibold">Phone:</span> 7478207706</p>
+
                             <p><span className="text-white font-semibold">Location:</span> Kolkata, India</p>
                         </div>
                     </div>
