@@ -1,6 +1,7 @@
 import ScrollyCanvas from "@/components/ScrollyCanvas";
 import Projects from "@/components/Projects";
 import ProfileDetails from "@/components/ProfileDetails";
+import Contact from "@/components/Contact";
 
 export default function Home() {
     return (
@@ -8,6 +9,7 @@ export default function Home() {
             <ScrollyCanvas />
             <ProfileDetails />
             <Projects />
+            <Contact />
         </main>
     );
 }
