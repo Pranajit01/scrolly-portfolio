@@ -4,7 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 import Overlay from "./Overlay";
 
-const FRAME_COUNT = 120;
+// FRAME_STEP: Load every Nth frame to reduce memory usage and "cut" frames as requested.
+const TOTAL_FRAMES = 120;
+const FRAME_STEP = 3;
+const RENDER_FRAME_COUNT = Math.ceil(TOTAL_FRAMES / FRAME_STEP);
 
 export default function ScrollyCanvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -13,37 +16,28 @@ export default function ScrollyCanvas() {
     const [currentFrame, setCurrentFrame] = useState(0);
 
     // We need a tall container to scroll through
+    // Increased height to 250vh to make text readable (slower scroll relative to content)
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"],
     });
 
-    // Preload images
+    // Preload images (Skip frames logic)
     useEffect(() => {
         const loadImages = async () => {
             const loadedImages: HTMLImageElement[] = [];
             const promises: Promise<void>[] = [];
 
-            for (let i = 0; i < FRAME_COUNT; i++) {
+            for (let i = 0; i < RENDER_FRAME_COUNT; i++) {
                 const promise = new Promise<void>((resolve, reject) => {
                     const img = new Image();
+
+                    // Calculate actual file index: 0, 3, 6, 9...
+                    const realIndex = i * FRAME_STEP;
+
                     // Pad number with leading zeros (000, 001, ... 119)
-                    const frameIndex = i.toString().padStart(3, "0");
-                    // NOTE: Adjust file naming logic if necessary based on exact asset names.
-                    // Based on file list: frame_000_delay-0.067s.png
-                    // The delay suffix might vary slightly or be consistent. 
-                    // To be safe, we might need a more robust loader or assume standard naming if we renamed them.
-                    // Since we didn't rename them, we have to guess the delay part or regex match.
-                    // However, for this demo, I will assume we might need to handle the variable delay string or 
-                    // just try to load the known structure. 
-                    // Let's assume for now they are mostly 0.067s or 0.066s. 
-                    // Actually, strict file paths are tricky without a manifest.
-                    // RECOMMENDATION: Rename files to frame_000.png via script or just handle error.
-                    // For this implementation, I will assume a standard name `frame_${index}.png` 
-                    // and relies on a user step to rename them OR I generate a manifest.
-                    // Since I can't generate a manifest easily client-side without a server listings, 
-                    // I will use a simple path for now and ask user to rename or I will execute a rename command.
+                    const frameIndex = realIndex.toString().padStart(3, "0");
 
                     img.src = `/sequence/frame_${frameIndex}.png`;
 
@@ -52,7 +46,7 @@ export default function ScrollyCanvas() {
                         resolve();
                     };
                     img.onerror = (e) => {
-                        console.error(`Failed to load frame ${i}`, e);
+                        console.error(`Failed to load frame ${realIndex}`, e);
                         resolve(); // Resolve anyway to avoid blocking
                     };
                 });
@@ -70,9 +64,10 @@ export default function ScrollyCanvas() {
     // Update frame based on scroll
     useMotionValueEvent(scrollYProgress, "change", (latest: number) => {
         // latest is 0 to 1
+        // Map 0-1 to 0-(RENDER_FRAME_COUNT-1)
         const frameIndex = Math.min(
-            FRAME_COUNT - 1,
-            Math.floor(latest * FRAME_COUNT)
+            RENDER_FRAME_COUNT - 1,
+            Math.floor(latest * RENDER_FRAME_COUNT)
         );
         setCurrentFrame(frameIndex);
     });
@@ -125,11 +120,14 @@ export default function ScrollyCanvas() {
     }, [currentFrame, images]);
 
     return (
-        <div ref={containerRef} className="relative h-[130vh] bg-transparent">
+        <div ref={containerRef} className="relative h-[250vh] bg-transparent">
+            {/* Sticky Container */}
             <div className="sticky top-0 h-screen w-full overflow-hidden">
                 {loading && (
                     <div className="absolute inset-0 flex items-center justify-center text-white z-50">
                         Loading Sequence...
+                        <br />
+                        <span className="text-xs text-gray-500 mt-2">Optimizing frames...</span>
                     </div>
                 )}
                 <canvas ref={canvasRef} className="block w-full h-full" />
