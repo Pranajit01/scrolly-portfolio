@@ -23,30 +23,22 @@ export default function Overlay({ scrollYProgress }: { scrollYProgress: any }) {
     const targetTop = isMobile ? "10%" : "5%";
     const targetScale = isMobile ? 0.8 : 0.6;
 
-    const top = useTransform(scrollYProgress, [0, 0.2], ["50%", targetTop]);
-    const left = useTransform(scrollYProgress, [0, 0.2], ["50%", targetLeft]);
-    const scale = useTransform(scrollYProgress, [0, 0.2], [1, targetScale]);
-
-    // X needs to remain -50% if we are at left 50% (mobile), but go to 0% if we are at left 85% (desktop)
-    // Actually, if we keep left 50% on mobile, we need x to stay -50%.
-    // If desktop, left 85%, x goes to 0% (origin top-right logic).
+    // SECTION 1: 0% -> 30% of scroll
+    const top = useTransform(scrollYProgress, [0, 0.25], ["50%", targetTop]);
+    const left = useTransform(scrollYProgress, [0, 0.25], ["50%", targetLeft]);
+    const scale = useTransform(scrollYProgress, [0, 0.25], [1, targetScale]);
     const targetX = isMobile ? "-50%" : "0%";
-    const x = useTransform(scrollYProgress, [0, 0.2], ["-50%", targetX]);
+    const x = useTransform(scrollYProgress, [0, 0.25], ["-50%", targetX]);
+    const y = useTransform(scrollYProgress, [0, 0.25], ["-50%", "0%"]);
+    const nameOpacity = useTransform(scrollYProgress, [0.85, 0.95], [1, 0]);
 
-    const y = useTransform(scrollYProgress, [0, 0.2], ["-50%", "0%"]);
+    // SECTION 2: 35% -> 65% (Middle Scroll)
+    const opacity2 = useTransform(scrollYProgress, [0.35, 0.45, 0.55, 0.65], [0, 1, 1, 0]);
+    const y2 = useTransform(scrollYProgress, [0.35, 0.65], [50, -50]);
 
-    // Sticky Name Fade Out at the end
-    const nameOpacity = useTransform(scrollYProgress, [0.8, 0.95], [1, 0]);
-
-    // 2. Middle Text Fade In/Out - Widened timeline for readability
-    // Was: [0.3, 0.4, 0.6, 0.7] -> New: [0.25, 0.35, 0.65, 0.75]
-    const opacity2 = useTransform(scrollYProgress, [0.25, 0.35, 0.65, 0.75], [0, 1, 1, 0]);
-    const y2 = useTransform(scrollYProgress, [0.25, 0.75], [50, -50]);
-
-    // 3. Bottom Text Fade In/Out - Widened timeline
-    // Was: [0.7, 0.8, 0.95] -> New: [0.7, 0.8, 0.95] (This one acts as the "last" one before profile, so keep it)
-    const opacity3 = useTransform(scrollYProgress, [0.7, 0.8, 0.95], [0, 1, 0]);
-    const y3 = useTransform(scrollYProgress, [0.7, 1], [50, 0]);
+    // SECTION 3: 70% -> 100% (Last Scroll)
+    const opacity3 = useTransform(scrollYProgress, [0.7, 0.8, 0.9, 1.0], [0, 1, 1, 0]);
+    const y3 = useTransform(scrollYProgress, [0.7, 1.0], [50, -50]);
 
     return (
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-10 overflow-hidden">
