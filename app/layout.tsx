@@ -10,6 +10,8 @@ export const metadata: Metadata = {
 };
 
 import SmoothScrolling from "@/components/SmoothScrolling";
+import Cursor from "@/components/Cursor";
+import RainbowBackground from "@/components/RainbowBackground";
 
 export default function RootLayout({
     children,
@@ -18,7 +20,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={`${inter.className} cursor-none`}>
+                <Cursor />
+                <RainbowBackground />
                 <SmoothScrolling>{children}</SmoothScrolling>
             </body>
         </html>
